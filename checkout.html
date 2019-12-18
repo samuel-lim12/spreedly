@@ -1,0 +1,81 @@
+<html>
+<head>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!--     <script language="JavaScript" type="text/javascript" src="https://core.spreedly.com/iframe/iframe-v1.min.js"></script>
+ -->    
+    <script src="https://core.spreedly.com/iframe/express-2.min.js"></script>
+
+</head>
+
+<body>
+
+<script type="text/javascript">
+    
+    $(document).ready(function(){
+        //Init require Spreedly Environment Key
+        SpreedlyExpress.init("WVN8WL3u6Ns9H0ugU8UOw0rQu8t", {
+          "amount": "$30.04",
+          "company_name": "Acme Widgets"
+        });
+
+        $("#submit").click(function(event){
+            SpreedlyExpress.openView();
+        });
+
+        SpreedlyExpress.onPaymentMethod(function(token, paymentMethod) {
+
+            // Send requisite payment method info to backend
+            var tokenField = document.getElementById("payment_method_token");
+            tokenField.setAttribute("value", token);
+
+            var browser_size = '01';
+            // The accept header from your server side rendered page. You'll need to inject it into the page. Below is an example.
+            var acceptHeader = 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+            // The request should include the browser data collected by using `Spreedly.ThreeDS.serialize().
+            let browserInfoValue = Spreedly.ThreeDS.serialize(
+                browser_size,
+                acceptHeader
+            );
+
+            var browserInfoField = document.getElementById("browser_info");
+            browserInfoField.setAttribute("value", browserInfoValue);
+
+            // console.log(browser_info);
+  // fetch('https://your-backend.test/purchase.json', {
+  //     method: 'POST',
+  //     body: JSON.stringify({
+
+  //       browser_info: browser_info,
+  //       attempt_3dsecure: true,
+  //       three_ds_version: "2",
+  //     })
+  //   });
+
+            var masterForm = document.getElementById('payment-form');
+            masterForm.submit();
+        });
+
+    });
+
+</script>
+
+<p>Checkout page</p>
+
+<pre>
+  Spreedly 3DS2 Test Data
+  Credit Cards
+  Card Number   CVV   Expiration  Type
+  4556761029983886  123   10/2029   Valid 3D Secure Enrolled Card
+  4024007101934890  123   10/2029   Invalid 3D Secure Enrolled Card
+</pre>
+
+<form id="payment-form" action="http://127.0.0.1/spreedly/payment.php">
+  <input type="hidden" name="payment_method_token" id="payment_method_token">
+  <input type="hidden" name="browser_info" id="browser_info">
+  <input type="button" value="Enter Payment Info" onclick="SpreedlyExpress.openView();">
+</form>
+
+</body>
+</html>

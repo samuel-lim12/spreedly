@@ -1,0 +1,43 @@
+<html>
+<head>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+
+<script type="text/javascript">
+    Spreedly.on('ready', function() {
+      document.getElementById("submit-button").removeAttribute('disabled');
+    });    
+</script>
+
+<form id="payment-form" action="http://127.0.0.1:8000/payment" onsubmit='submitPaymentForm(); return false;'>
+
+    <label for="full_name">Name</label>
+    <input type="text" id="full_name" name="full_name"><br/>
+
+    <label>Credit Card Number</label>
+    <div id="spreedly-number" style="width:225px; height:35px; border: 2px solid"></div><br/>
+
+    <label for="spreedly-exp-month">Expiration Date</label>
+    <input type="text" id="month" name="month" maxlength="2">
+    <input type="text" id="year" name="year" maxlength="4"><br/>
+
+    <label>CVV</label>
+    <div id="spreedly-cvv" style="width:60px; height:35px; border: 2px solid "></div><br/>
+
+    <input id="submit-button" type="submit" value="Pay Now" disabled>
+    <input type="hidden"  name="payment_method_token" id="payment_method_token">
+
+    <script src="https://core.spreedly.com/iframe/iframe-0.10.min.js" id="spreedly-iframe"
+      data-environment-key="WVN8WL3u6Ns9H0ugU8UOw0rQu8t"
+      data-number-id="spreedly-number"
+      data-cvv-id="spreedly-cvv">
+    </script>
+
+  </form>
+
+</body>
+</html>
