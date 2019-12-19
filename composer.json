@@ -1,0 +1,6 @@
+{
+    "name": "nextbase/spreedly",
+    "require": {
+        "larapack/dd": "1.*"
+    }
+}

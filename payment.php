@@ -1,8 +1,8 @@
 <?php
 
+require_once __DIR__ . '/vendor/autoload.php';
 echo('Payment Method Token : ' . $_GET['payment_method_token'] . '<br>');
 echo('Browser Info : ' . $_GET['browser_info'] . '<br>');
-
 ?>
 <br>
 <div>

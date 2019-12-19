@@ -1,5 +1,5 @@
 <?php
-
+require_once __DIR__ . '/vendor/autoload.php';
     $payload = json_encode([
       'transaction' => [
         'payment_method_token' => $_POST['payment_method_token'],
@@ -13,7 +13,6 @@
         'browser_info' => $_POST['browser_info']
       ]
     ]);
-    print_r($_POST);die;
     $spreedlyGatewayToken = 'S9SBn2WA26AsO9WNSUlp6Ct5rxZ';
     $spreedlyEnvironmentKey = '5XewDZ9WYlYcCEmD8LRd7IVK3mh';
     $spreedlyApiAccessSecret = '9MH5GZ4dhFBBRZkVLgySd45tGl4iIddAmrHtjwfesdzLecyxufbA94qeT0RnkTyW';
@@ -43,8 +42,8 @@
     $result = curl_exec($ch);
     $jsonResult = json_decode($result, true);
     curl_close($ch);
-    var_dump($result);die;
     print_r($jsonResult);
+    dd($jsonResult);
 
     $transactionToken = $jsonResult['transaction']['token'];
 

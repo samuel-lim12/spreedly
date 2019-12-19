@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/vendor/autoload.php';
     $transactionToken = $_GET['transaction_token'];
 
     echo("Trigger completion of transaction : $transactionToken");
