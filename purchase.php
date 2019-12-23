@@ -43,7 +43,7 @@ require_once __DIR__ . '/vendor/autoload.php';
     $jsonResult = json_decode($result, true);
     curl_close($ch);
     print_r($jsonResult);
-    dd($jsonResult);
+    // dd($jsonResult);
 
     $transactionToken = $jsonResult['transaction']['token'];
 
@@ -55,11 +55,11 @@ require_once __DIR__ . '/vendor/autoload.php';
     {
         $requiredAction = 'none';
     }
-
     echo("<br><br>Transaction Token : $transactionToken");
     echo('<br>Transaction State : ' . $jsonResult['transaction']['state']);
     echo('<br>Response Message : ' . $jsonResult['transaction']['response']['message']);
     echo("<br>Required Action : $requiredAction");
+    dd($jsonResult);
 
     if ($requiredAction == 'device_fingerprint') :
         $deviceFingerprintForm = $jsonResult['transaction']['device_fingerprint_form']['cdata'];

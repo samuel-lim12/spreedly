@@ -4,8 +4,8 @@
 
     echo("Transaction detail : $transactionToken<br><br>");
 
-    $spreedlyEnvironmentKey = 'WVN8WL3u6Ns9H0ugU8UOw0rQu8t';
-    $spreedlyApiAccessSecret = '6kUobnn4Y4FnE7T5OTN5EAnli9qybuJBS1DwxXf9zsBkrWmXKKlFvv4SRoyF4w3n';
+    $spreedlyEnvironmentKey = '5XewDZ9WYlYcCEmD8LRd7IVK3mh';
+    $spreedlyApiAccessSecret = '9MH5GZ4dhFBBRZkVLgySd45tGl4iIddAmrHtjwfesdzLecyxufbA94qeT0RnkTyW';
 
     $ch = curl_init("https://core.spreedly.com/v1/transactions/$transactionToken.json");
     $header = array();

@@ -1,0 +1,101 @@
+<html>
+<head>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!--     <script language="JavaScript" type="text/javascript" src="https://core.spreedly.com/iframe/iframe-v1.min.js"></script>
+ -->    
+    <script src="https://core.spreedly.com/iframe/express-2.min.js"></script>
+    <script src="https://core.spreedly.com/iframe/iframe-v1.min.js"></script>
+
+
+</head>
+
+<body>
+
+<script type="text/javascript">
+function submitPaymentForm() {
+    var requiredFields = {};
+
+    // Get required, non-sensitive, values from host page
+    requiredFields["full_name"] = document.getElementById("full_name").value;
+    requiredFields["month"] = document.getElementById("month").value;
+    requiredFields["year"] = document.getElementById("year").value;
+
+    Spreedly.tokenizeCreditCard(requiredFields);
+}
+
+$(document).ready(function(){
+        //Init require Spreedly Environment Key
+    // SpreedlyExpress.init("5XewDZ9WYlYcCEmD8LRd7IVK3mh", {
+    //     "amount": "$30.04",
+    //     "company_name": "Acme Widgets"
+    // });
+
+    Spreedly.init("5XewDZ9WYlYcCEmD8LRd7IVK3mh", {
+        "numberEl": "spreedly-number",
+        "cvvEl": "spreedly-cvv"
+    });
+    
+    Spreedly.on("ready", function () {
+        var submitButton = document.getElementById('submit-button');
+        submitButton.disabled = false;
+
+    });
+
+    Spreedly.on('errors', function(errors) {
+        for (var i=0; i < errors.length; i++) {
+            var error = errors[i];
+            console.log(error);
+        };
+    });
+
+    Spreedly.on('paymentMethod', function(token, pmData) {
+
+        // Set the token in the hidden form field
+        var tokenField = document.getElementById("payment_method_token");
+        tokenField.setAttribute("value", token);
+
+        // Submit the form
+        var masterForm = document.getElementById('payment-form');
+        masterForm.submit();
+    });
+});
+
+</script>
+
+<p>Checkout page</p>
+
+<pre>
+  Spreedly 3DS2 Test Data
+  Credit Cards
+  Card Number   CVV   Expiration  Type
+  4556761029983886  123   10/2029   Valid 3D Secure Enrolled Card
+  4024007101934890  123   10/2029   Invalid 3D Secure Enrolled Card
+</pre>
+
+<form id="payment-form"
+  action="http://127.0.0.1/spreedly/payment.php"
+  onsubmit='submitPaymentForm(); return false;'>
+
+  <input type="hidden"  name="payment_method_token" id="payment_method_token">
+  <input type="text" name="browser_info" id="browser_info">
+
+  <label for="full_name">Name</label>
+  <input type="text" id="full_name" name="full_name"><br/>
+
+  <label>Credit Card Number</label>
+  <div id="spreedly-number" style="width:225px; height:35px; border: 2px solid"></div><br/>
+
+  <label for="spreedly-exp-month">Expiration Date</label>
+  <input type="text" id="month" name="month" maxlength="2">
+  <input type="text" id="year" name="year" maxlength="4"><br/>
+
+  <label>CVV</label>
+  <div id="spreedly-cvv" style="width:60px; height:35px; border: 2px solid "></div><br/>
+
+  <input id="submit-button" type="submit" value="Pay Now" disabled>
+
+</form>
+</body>
+</html>
