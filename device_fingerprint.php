@@ -18,7 +18,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 
     $(document).ready(function(){
 
-    Spreedly.init("5XewDZ9WYlYcCEmD8LRd7IVK3mh", {
+    Spreedly.init("DDZilKGbt6ptLWMguCNi4UXQHi7", {
         "numberEl": "spreedly-number",
         "cvvEl": "spreedly-cvv"
     });
@@ -29,7 +29,7 @@ require_once __DIR__ . '/vendor/autoload.php';
           challengeIframeLocation: 'challenge', 
           // The DOM node that you'd like to inject the challenge flow
           transactionToken: '<?php echo($_POST['transaction_token']); ?>', 
-          environmentKey: '5XewDZ9WYlYcCEmD8LRd7IVK3mh'
+          environmentKey: 'DDZilKGbt6ptLWMguCNi4UXQHi7'
           // The token for the transaction - used to poll for state
           // challengeIframeClasses: '...', (optional)
           // The css classes that you'd like to apply to the challenge iframe.

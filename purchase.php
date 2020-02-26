@@ -13,9 +13,10 @@ require_once __DIR__ . '/vendor/autoload.php';
         'browser_info' => $_POST['browser_info']
       ]
     ]);
-    $spreedlyGatewayToken = 'S9SBn2WA26AsO9WNSUlp6Ct5rxZ';
-    $spreedlyEnvironmentKey = '5XewDZ9WYlYcCEmD8LRd7IVK3mh';
-    $spreedlyApiAccessSecret = '9MH5GZ4dhFBBRZkVLgySd45tGl4iIddAmrHtjwfesdzLecyxufbA94qeT0RnkTyW';
+    dump($payload);
+    $spreedlyGatewayToken = 'KGciMycydHw6TwNxoRO9wFvPvWN';
+    $spreedlyEnvironmentKey = 'DDZilKGbt6ptLWMguCNi4UXQHi7';
+    $spreedlyApiAccessSecret = 'n2prFH4qozF6s2S71uvY4fwDANrpG9irkcNVU2YgctkBxG7o7IeFbrv2j0Satapp';
 
     $ch = curl_init("https://core.spreedly.com/v1/gateways/$spreedlyGatewayToken/purchase.json");
     $header = array();
@@ -59,7 +60,7 @@ require_once __DIR__ . '/vendor/autoload.php';
     echo('<br>Transaction State : ' . $jsonResult['transaction']['state']);
     echo('<br>Response Message : ' . $jsonResult['transaction']['response']['message']);
     echo("<br>Required Action : $requiredAction");
-    dd($jsonResult);
+    dump($jsonResult);
 
     if ($requiredAction == 'device_fingerprint') :
         $deviceFingerprintForm = $jsonResult['transaction']['device_fingerprint_form']['cdata'];
